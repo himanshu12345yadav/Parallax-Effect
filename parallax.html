@@ -2,159 +2,162 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parallax Effect</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Rubik&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="parallax.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parallax Effect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto+Mono&family=Rubik&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="parallax.css">
+  <link rel="stylesheet" href="./assets/prism.css">
+  <script defer src="./assets/prism.js" type="text/javascript"></script>
 </head>
 
 <body>
-    <header class="heading valign-wrapper">
-        <h4 class="topic" style="font-family: 'Lobster', cursive;">Parallax Effect</h4>
-    </header>
-    <div class="parallax-container">
-        <img src="https://picsum.photos/1920/1080/" alt="big_image">
+  <header class="heading valign-wrapper">
+    <h4 class="topic" style="font-family: 'Lobster', cursive;">Parallax Effect</h4>
+  </header>
+  <div class="parallax-container">
+    <img src="https://source.unsplash.com/random/1920x1080" alt="big_image">
+  </div>
+  <div class="section">
+    <h4 class="title">Parallax</h4>
+    <div class="content">
+      To achive parallax effect we have to keep certain things in mind , Firstly when we scroll the screen the
+      image also has
+      to scroll to create a parallax effect illusion but the movement of image should be in opposite direction and
+      in
+      controlled
+      manner, because this may happens that excessive scrolling of image might leaves empty space within the
+      parallax container
+      and we see a blank white space which completely ruins our parallax effect. For this
+      we have a option that for every image we first has to calculate the image moving speed so that it won't
+      cross its boundries until that image container goes out of the screen. But scrolling the image when the
+      image is
+      outside the focus area or screen is not a also waste of resouces and performance, so to fix this we have to
+      stop the image scrolling as the image goes out of the focus area. For this task i made a container with
+      class
+      parallax-container and inside it we put image which we want to give a parallax.
     </div>
-    <div class="section">
-        <h4 class="title">Parallax</h4>
-        <div class="content">
-            To achive parallax effect we have to do certain thing. Firstly when we scroll the screen the image also has
-            to scroll to create a parallax effect illusion but the movement of image should be in opposite direction and
-            in
-            controlled
-            fashion, because this may happens that excessive scrolling of image may leaves empty space within container
-            and we see a blank white space which completely ruins our parallax effect.For this
-            we have a option that for every image we first has to calculate the image moving speed so that it won't
-            cross its boundries until that image container goes out of the screen. But scrolling the image when the
-            image is
-            outside the focus area or screen is not a also waste of resouces and performance, so to fix this we have to
-            stop the image scrolling as the image goes out of the focus area. For this task i made a container with
-            class
-            parallax-container and inside it we put image which we want to give a parallax.
-        </div>
+  </div>
+  <div class="parallax-container">
+    <img src="https://source.unsplash.com/random/1300x920" alt="big_size_image">
+  </div>
+  <div class="section">
+    <div class="title">How to achieve this?</div>
+    <div class="content">
+      First we have to make a scroll event listener which is gonna to fire every time when the screen is
+      scrolled.Then we gonna to calculate the speed using basic calculations for each images so that image moves
+      in a controlled fashion. Image should be scroll in the relative difference between the image size and
+      container size. For each image their will be seperate speed according to their sizes. Also don't forget to
+      make the &nbsp;<code>overflow: hidden</code> &nbsp; for image. Also to make a more field of view for the
+      image, it
+      should be at the baseline of flex container so that it gets more space to move a parallax can be seen
+      easily.
     </div>
-    <div class="parallax-container">
-        <img src="https://picsum.photos/1300/920/" alt="big_size_image">
+  </div>
+  <div class="parallax-container">
+    <img src="https://source.unsplash.com/random/1500x900" alt="medium_image">
+  </div>
+  <div class="section">
+    <div class="title">JS Helper Functions/Properties</div>
+    <div class="content">
+      To universalize the parallax effect on any kind of screens i take the help of some JS helper properties.
+      <div class="property">
+        <span class="name">window.screen.availHeight</span> This properties spits out the browser screen
+        height. Moreover window.screen object has many inbuilt properties like availHeight, availWidth,
+        pixeldensity and many more. In simple words this contains all information about the browser screen.
+      </div>
+      <div class="property">
+        <span class="name">image.naturalHeight</span> This property gives the natural height of the image,
+        means the size without any alteration and scaling inside the browser.
+      </div>
+      <div class="property">
+        <span class="name">image.height</span> This give the realtime image size, After importing the image
+        into the browser , say you scale the image or increase the image sizes then this property gives the
+        final size of the image but the previous naturalHeight property gives the unaltered image sizes.
+      </div>
+      <div class="property">
+        <span class="name">container.clientHeight</span> This gives the relatime height and width of the
+        container, means altering is considered here.
+      </div>
+      <div class="property">
+        <span class="name">container.offsetTop</span> This gives the depth of the container from the top of
+        the webpage. It's not be mistaken with the depth from the top of screen, which decreases as we scrolls
+        but the offsetTop remains constant if another markup is not inserted between the top of page and the
+        container.
+      </div>
+      <div class="property">
+        <span class="name">window.scrollY</span> This give the number of pixels scrolled. For simpler
+        visualisation it gives the depth of screen top from the top of the page. If page is not scrolled
+        means screen top and page top are at same place so scollY gives 0. scrollY gives the vertical scrolling
+        while scrollX gives horizontal scrolling.
+      </div>
     </div>
-    <div class="section">
-        <div class="title">How to achieve this?</div>
-        <div class="content">
-            First we have to make a scroll event listener which is gonna to fire every time when the screen is
-            scrolled.Then we gonna to calculate the speed using basic calculations for each images so that image moves
-            in a controlled fashion. Image should be scroll in the relative difference between the image size and
-            container size. For each image their will be seperate speed according to their sizes. Also don't forget to
-            make the &nbsp;<code>overflow: hidden</code> &nbsp; for image. Also to make a more field of view for the
-            image, it
-            should be at the baseline of flex container so that it gets more space to move a parallax can be seen
-            easily.
-        </div>
-    </div>
-    <div class="parallax-container">
-        <img src="https://picsum.photos/1500/900/" alt="medium_image">
-    </div>
-    <div class="section">
-        <div class="title">JS Helper Functions/Properties</div>
-        <div class="content">
-            To universalize the parallax effect on any kind of screens i take the help of some JS helper properties.
-            <div class="property">
-                <span class="name">window.screen.availHeight</span> This properties spits out the browser screen
-                height. Moreover window.screen object has many inbuilt properties like availHeight, availWidth,
-                pixeldensity and many more. In simple words this contains all information about the browser screen.
-            </div>
-            <div class="property">
-                <span class="name">image.naturalHeight</span> This property gives the natural height of the image,
-                means the size without any alteration and scaling inside the browser.
-            </div>
-            <div class="property">
-                <span class="name">image.height</span> This give the realtime image size, After importing the image
-                into the browser , say you scale the image or increase the image sizes then this property gives the
-                final size of the image but the previous naturalHeight property gives the unaltered image sizes.
-            </div>
-            <div class="property">
-                <span class="name">container.clientHeight</span> This gives the relatime height and width of the
-                container, means altering is considered here.
-            </div>
-            <div class="property">
-                <span class="name">container.offsetTop</span> This gives the depth of the container from the top of
-                the webpage. It's not be mistaken with the depth from the top of screen, which decreases as we scrolls
-                but the offsetTop remains constant if another markup is not inserted between the top of page and the
-                container.
-            </div>
-            <div class="property">
-                <span class="name">window.scrollY</span> This give the number of pixels scrolled. For simpler
-                visualisation it gives the depth of screen top from the top of the page. If page is not scrolled
-                means screen top and page top are at same place so scollY gives 0. scrollY gives the vertical scrolling
-                while scrollX gives horizontal scrolling.
-            </div>
-        </div>
-    </div>
-    <div class="parallax-container">
-        <img src="https://picsum.photos/1100/800/" alt="small_image">
-    </div>
-    <div class="section">
-        <div class="markup">
-            <div class="center" style="font-family: 'Lobster', cursive;">Vanilla Javascript Implementation</div>
-            <pre>
-        <code>
-    <span class='window-obj'>window</span>.addEventListener<span class='bracket-pairs'>(</span>'scroll', <span class='bracket-pairs'>(</span><span class='bracket-pairs'>)</span> => <span class='bracket-pairs'>{</span>
-    <span class='d-type'>var</span> image = <span class='document-obj'>document</span>.getElementsByTagName<span class='bracket-pairs'>(</span><span class="quotes">'img'</span><span class='bracket-pairs'>)</span>;
-    <span class='d-type'>var</span> container = <span class='document-obj'>document</span>.getElementsByClassName<span class='bracket-pairs'>(</span><span class="braket-pairs">'parallax-container'</span><span class='bracket-pairs'>)</span>;
-    [...container].forEach<span class='bracket-pairs'>(</span><span class='bracket-pairs'>(</span><span class='container-obj'>element</span>, index<span class='bracket-pairs'>)</span> => <span class='bracket-pairs'>{</span>
-        if <span class='bracket-pairs'>(</span>
-            <span class='window-obj'>window</span>.screen.availHeight &lt; <span class='container-obj'>element</span>.offsetTop &&
-            <span class='window-obj'>window</span>.scrollY + <span class='window-obj'>window</span>.screen.availHeight > <span class='container-obj'>element</span>.offsetTop &&
-            <span class='window-obj'>window</span>.scrollY &lt; <span class='container-obj'>element</span>.offsetTop + <span class='container-obj'>element</span>.clientHeight
-        <span class='bracket-pairs'>)</span> <span class='bracket-pairs'>{</span>
-            // normal condition image height is more than the container height.
-            if <span class='bracket-pairs'>(</span>image[index].height - <span class='container-obj'>element</span>.clientHeight > 0<span class='bracket-pairs'>)</span> <span class='bracket-pairs'>{</span>
-                <span class='d-type'>var</span> speed =
-                   <span class='window-obj'>window</span>.screen.availHeight /<span class='bracket-pairs'>(</span>image[index].height - <span class='container-obj'>element</span>.clientHeight<span class='bracket-pairs'>)</span>;
-                image[index].style.transform = `translateY<span class='bracket-pairs'>(</span>$<span class='bracket-pairs'>{</span>
-                    <span class='bracket-pairs'>(</span><span class='window-obj'>window</span>.scrollY +
-                        <span class='window-obj'>window</span>.screen.availHeight -
-                        <span class='container-obj'>element</span>.offsetTop<span class='bracket-pairs'>)</span> /
-                    speed
-                <span class='bracket-pairs'>}</span>px<span class='bracket-pairs'>)</span>`;
-            <span class='bracket-pairs'>}</span> else <span class='bracket-pairs'>{</span>
-                var scale_value =
-                    <span class='container-obj'>element</span>.clientHeight / image[index].height + 1;
-                // image height is less than the container height so we have to scale the image to fit the container.
-                <span class='d-type'>var</span> speed =
-                    <span class='bracket-pairs'>(</span><span class='window-obj'>window</span>.screen.availHeight + <span class='container-obj'>element</span>.clientHeight<span class='bracket-pairs'>)</span> /
-                    <span class='bracket-pairs'>(</span><span class='container-obj'>element</span>.clientHeight - image[index].height<span class='bracket-pairs'>)</span>;
-                image[index].style.transform = `translateY<span class='bracket-pairs'>(</span>$<span class='bracket-pairs'>{</span>
-                    <span class='bracket-pairs'>(</span><span class='window-obj'>window</span>.scrollY +
-                        <span class='window-obj'>window</span>.screen.availHeight -
-                        <span class='container-obj'>element</span>.offsetTop<span class='bracket-pairs'>)</span> /
-                    speed
-                <span class='bracket-pairs'>}</span>px<span class='bracket-pairs'>)</span> scale<span class='bracket-pairs'>(</span>$<span class='bracket-pairs'>{</span>scale_value<span class='bracket-pairs'>}</span><span class='bracket-pairs'>)</span>`;
-            <span class='bracket-pairs'>}</span>
-        <span class='bracket-pairs'>}</span> else if <span class='bracket-pairs'>(</span>
-            <span class='window-obj'>window</span>.screen.availHeight > <span class='container-obj'>element</span>.offsetTop &&
-            <span class='window-obj'>window</span>.scrollY &lt; <span class='container-obj'>element</span>.offsetTop + <span class='container-obj'>element</span>.clientHeight
-        <span class='bracket-pairs'>)</span> <span class='bracket-pairs'>{</span>
-            <span class='d-type'>var</span> speed =
-                <span class='bracket-pairs'>(</span><span class='container-obj'>element</span>.offsetTop + <span class='container-obj'>element</span>.clientHeight<span class='bracket-pairs'>)</span> /
-                <span class='bracket-pairs'>(</span>image[index].height - <span class='container-obj'>element</span>.clientHeight<span class='bracket-pairs'>)</span>;
-            image[index].style.transform = `translateY<span class='bracket-pairs'>(</span>$<span class='bracket-pairs'>{</span>
-                <span class='window-obj'>window</span>.scrollY / speed
-            <span class='bracket-pairs'>}</span>px<span class='bracket-pairs'>)</span>`;
-            <span class='bracket-pairs'>}</span> 
-            <span class='bracket-pairs'>}</span><span class='bracket-pairs'>)</span>;
-            <span class='bracket-pairs'>}</span><span class='bracket-pairs'>)</span>;
-            </code>
+  </div>
+  <div class="parallax-container">
+    <img src="https://source.unsplash.com/random/1100x800" alt="small_image">
+  </div>
+  <div class="sectiona">
+    <div class="markup">
+      <div class="center" style="font-family: 'Lobster', cursive;">Vanilla Javascript Implementation</div>
+      <pre>
+<code class="language-js">
+  window.addEventListener("scroll", () => {
+    var image = document.getElementsByTagName("img");
+    var container = document.getElementsByClassName("parallax-container");
+    [...container].forEach((element, index) => {
+      if (
+        window.screen.availHeight < element.offsetTop &&
+        window.scrollY + window.screen.availHeight > element.offsetTop &&
+        window.scrollY < element.offsetTop + element.clientHeight
+      ) {
+        // If the image is someway below.
+        if (image[index].height - element.clientHeight > 0) {
+          // Normal condition , image height is more than the container's height.
+          var speed =
+            window.screen.availHeight /
+            (image[index].height - element.clientHeight);
+          image[index].style.transform = `translateY(${
+            (window.scrollY + window.screen.availHeight - element.offsetTop) /
+            speed
+          }px)`;
+        } else {
+          // For images height smaller that the Container's height.
+          const scale_value = element.clientHeight / image[index].height + 1;
+          var speed =
+            (window.screen.availHeight + element.clientHeight) /
+            (element.clientHeight - image[index].height);
+  
+          image[index].style.transform = `translateY(${
+            (window.scrollY + window.screen.availHeight - element.offsetTop) /
+            speed
+          }px) scale(${scale_value})`;
+        }
+      } else if (
+        // Image can be seen at the first sight when the page is loaded.
+        window.screen.availHeight > element.offsetTop &&
+        window.scrollY < element.offsetTop + element.clientHeight
+      ) {
+        var speed =
+          (element.offsetTop + element.clientHeight) /
+          (image[index].height - element.clientHeight);
+        image[index].style.transform = `translateY(${window.scrollY / speed}px)`;
+      }
+    });
+  });
+   
+</code>
         </pre>
-        </div>
     </div>
-    <footer class="page-footer valign-wrapper">
-        <div class="valign-wrapper footer-content">
-            <div class="valign-wrapper">Made with &nbsp;<i class="material-icons pink-text">favorite</i> &nbsp; by
-                Himanshu Yadav</div>
-        </div>
-    </footer>
+  </div>
+  <footer class="page-footer valign-wrapper">
+    <div class="valign-wrapper footer-content">
+      <div class="valign-wrapper">Made with &nbsp;<i class="material-icons pink-text">favorite</i> &nbsp; by
+        Himanshu Yadav</div>
+    </div>
+  </footer>
 
 </body>
 <script defer src="parallax.js" type="text/javascript"></script>
