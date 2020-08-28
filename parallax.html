@@ -5,40 +5,52 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Parallax Effect</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto+Mono&family=Rubik&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Lobster&family=Roboto+Mono&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="parallax.css">
   <link rel="stylesheet" href="./assets/prism.css">
   <script defer src="./assets/prism.js" type="text/javascript"></script>
 </head>
 
-<body>
+<body class="overlay">
   <header class="heading valign-wrapper">
-    <h4 class="topic" style="font-family: 'Lobster', cursive;">Parallax Effect</h4>
+    <h4 class="topic">Parallax Effect</h4>
   </header>
+  <div class="bubble-wrapper">
+    <div class="ellipses">
+      <div class="ellipse" id="ellipse-1"></div>
+    </div>
+    <div class="ellipses">
+      <div class="ellipse" id="ellipse-2"></div>
+    </div>
+    <div class="ellipses">
+      <div class="ellipse" id="ellipse-3"></div>
+    </div>
+    <div class="ellipses">
+      <div class="ellipse" id="ellipse-4"></div>
+    </div>
+    <div class="ellipses">
+      <div class="ellipse" id="ellipse-5"></div>
+    </div>
+  </div>
   <div class="parallax-container">
     <img src="https://source.unsplash.com/random/1920x1080" alt="big_image">
   </div>
   <div class="section">
     <h4 class="title">Parallax</h4>
     <div class="content">
-      To achive parallax effect we have to keep certain things in mind , Firstly when we scroll the screen the
-      image also has
-      to scroll to create a parallax effect illusion but the movement of image should be in opposite direction and
-      in
-      controlled
-      manner, because this may happens that excessive scrolling of image might leaves empty space within the
-      parallax container
-      and we see a blank white space which completely ruins our parallax effect. For this
-      we have a option that for every image we first has to calculate the image moving speed so that it won't
-      cross its boundries until that image container goes out of the screen. But scrolling the image when the
-      image is
-      outside the focus area or screen is not a also waste of resouces and performance, so to fix this we have to
-      stop the image scrolling as the image goes out of the focus area. For this task i made a container with
-      class
-      parallax-container and inside it we put image which we want to give a parallax.
+      To achieve parallax effect we have to keep certain things in mind, Firstly when we scroll the screen the image
+      also has to scroll to create a parallax effect illusion but the movement of the image should be in opposite
+      direction and in a controlled manner because this may happen that excessive scrolling of image might leave empty
+      space within the parallax container and we see a blank white space which completely ruins our parallax effect. For
+      this, we have an option that for every image we first have to calculate the image moving speed so that it won't
+      cross its boundaries until that image container goes out of the screen. But scrolling the image when the image is
+      outside the focus area or screen is not an also waste of resources and performance, so to fix this we have to stop
+      the image scrolling as the image goes out of the focus area. For this task, I made a container with a class
+      parallax-container and inside it, we put the image in which we want to give a parallax Effect.
     </div>
   </div>
   <div class="parallax-container">
@@ -47,14 +59,13 @@
   <div class="section">
     <div class="title">How to achieve this?</div>
     <div class="content">
-      First we have to make a scroll event listener which is gonna to fire every time when the screen is
-      scrolled.Then we gonna to calculate the speed using basic calculations for each images so that image moves
-      in a controlled fashion. Image should be scroll in the relative difference between the image size and
-      container size. For each image their will be seperate speed according to their sizes. Also don't forget to
-      make the &nbsp;<code>overflow: hidden</code> &nbsp; for image. Also to make a more field of view for the
-      image, it
-      should be at the baseline of flex container so that it gets more space to move a parallax can be seen
-      easily.
+      First, we have to make a scroll event listener which is gonna fire whenever the screen is scrolled. Then we gonna
+      calculate the speed using basic calculations for each image so that image moves in a controlled fashion. The image
+      should be scroll in the relative difference between the image size and container size. For each image, there will
+      be separate speed according to their sizes. Also, don't forget to make the &nbsp; <code>overflow: hidden </code>
+      &nbsp; for the image. Also to
+      make a more field of view for the image, it should be at the baseline of flex container so that it gets more space
+      to move and the parallax can be seen easily.
     </div>
   </div>
   <div class="parallax-container">
@@ -63,35 +74,35 @@
   <div class="section">
     <div class="title">JS Helper Functions/Properties</div>
     <div class="content">
-      To universalize the parallax effect on any kind of screens i take the help of some JS helper properties.
+      To universalize the parallax effect on any kind of screens I take the help of some JS helper properties.
       <div class="property">
-        <span class="name">window.screen.availHeight</span> This properties spits out the browser screen
-        height. Moreover window.screen object has many inbuilt properties like availHeight, availWidth,
-        pixeldensity and many more. In simple words this contains all information about the browser screen.
+        <span class="name">window.screen.availHeight</span> This property spits out the browser screen height. Moreover,
+        window.screen object has many inbuilt properties like availHeight, availWidth,
+        pixeldensity, and many more. In simple words, this contains all information about the browser screen.
       </div>
       <div class="property">
         <span class="name">image.naturalHeight</span> This property gives the natural height of the image,
         means the size without any alteration and scaling inside the browser.
       </div>
       <div class="property">
-        <span class="name">image.height</span> This give the realtime image size, After importing the image
-        into the browser , say you scale the image or increase the image sizes then this property gives the
-        final size of the image but the previous naturalHeight property gives the unaltered image sizes.
+        <span class="name">image.height</span>
+        This gives the realtime image size, After importing the image
+        into the browser, say you scale the image or increase the image sizes then this property gives the final size of
+        the image but the previous naturalHeight property gives the unaltered image sizes.
       </div>
       <div class="property">
-        <span class="name">container.clientHeight</span> This gives the relatime height and width of the
-        container, means altering is considered here.
+        <span class="name">container.clientHeight</span> This gives the realtime height and width of the
+        container means altering is considered here.
       </div>
       <div class="property">
-        <span class="name">container.offsetTop</span> This gives the depth of the container from the top of
-        the webpage. It's not be mistaken with the depth from the top of screen, which decreases as we scrolls
-        but the offsetTop remains constant if another markup is not inserted between the top of page and the
-        container.
+        <span class="name">container.offsetTop</span> This gives the depth of the container from the top of the webpage.
+        It's not be mistaken with the depth from the top of the screen, which decreases as we scrolls but the offsetTop
+        remains constant if another markup is not inserted between the top of the page and the container.
       </div>
       <div class="property">
-        <span class="name">window.scrollY</span> This give the number of pixels scrolled. For simpler
-        visualisation it gives the depth of screen top from the top of the page. If page is not scrolled
-        means screen top and page top are at same place so scollY gives 0. scrollY gives the vertical scrolling
+        <span class="name">window.scrollY</span>This gives the number of pixels scrolled. For simpler visualization, it
+        gives the depth of the screen top from the top of the page. If the page is not scrolled
+        means screen top and page top are at the same place so scollY gives 0. scrollY gives the vertical scrolling
         while scrollX gives horizontal scrolling.
       </div>
     </div>
@@ -101,13 +112,13 @@
   </div>
   <div class="sectiona">
     <div class="markup">
-      <div class="center" style="font-family: 'Lobster', cursive;">Vanilla Javascript Implementation</div>
+      <div class="center topic">Vanilla Javascript Implementation</div>
       <pre>
 <code class="language-js">
   window.addEventListener("scroll", () => {
     var image = document.getElementsByTagName("img");
     var container = document.getElementsByClassName("parallax-container");
-    [...container].forEach((element, index) => {
+    Array.from(container).forEach((element, index) => {
       if (
         window.screen.availHeight < element.offsetTop &&
         window.scrollY + window.screen.availHeight > element.offsetTop &&
@@ -154,7 +165,7 @@
   </div>
   <footer class="page-footer valign-wrapper">
     <div class="valign-wrapper footer-content">
-      <div class="valign-wrapper">Made with &nbsp;<i class="material-icons pink-text">favorite</i> &nbsp; by
+      <div class="valign-wrapper">Made with &nbsp;<i class="material-icons white-text ">favorite</i> &nbsp; by
         Himanshu Yadav</div>
     </div>
   </footer>
